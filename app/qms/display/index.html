@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="DisplayApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+    <meta name="author" content="">
+
+	<title>Display Queue</title>
+
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap.min.css" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" crossorigin="anonymous">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
+  	<script src="link/jquery.min.js"></script>
+  	<script src="link/jquery.js"></script>
+  	
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script> -->
+  	<script src="link/angular-1.6.5/angular.min.js"></script>
+  	<script src="link/angular-1.6.5/angular-route.min.js"></script>
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+  	<script src="link/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  	<script src="link/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+  	<script src="/socket.io/socket.io.js"></script>
+  	<script src="controller/display.js"></script>
+
+</head>
+<body >
+	<div id="wrapper" >
+		<div class="container" ng-controller = "DisplayCtrl" >
+			
+			<!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            Brand and toggle get grouped for better mobile display
+	            <div class="navbar-header"></div>
+	        </nav> -->
+<!-- 	        <br><br><br><br><br><br> -->
+			<table class="table table-bordered" ><!-- style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;" -->
+				<thead bgcolor="#3E3E3E">
+					<th style="width: 30%; height: 18%; font-size: 60px; text-align: center;" ><font color="#EDEDED"> Services </font></th>
+					<th style="height: 18%; font-size: 60px; text-align: center;"><font color="#EDEDED"> Queue </font></th>
+					<!-- <th style="height: 25%; font-size: 70px; text-align: center;"><font color="#EDEDED"> Status </font></th> -->
+					<th style="height: 18%; font-size: 60px; text-align: center;"><font color="#EDEDED"> Student ID </font></th>
+				</thead>
+				<tbody>
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559" ><font color="#EDEDED"> Counter 1 </font></td>
+						<td align="center" ng-model="currentQ1" bgcolor="#EDEDED"><span ng-style="color1" >{{currentQ1}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status1"><span ng-style="color1" >{{status1}}</span></td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID1}}</td>
+					</tr>
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559"><font color="#EDEDED"> Counter 2 </font></td>
+						<td align="center" bgcolor="#EDEDED" ng-model="currentQ2"><span ng-style="color2" > {{currentQ2}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status2"> <span ng-style="color2">{{status2}}</span> </td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID2}}</td>
+					</tr >
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559"><font color="#EDEDED"> Counter 3 </font></td>
+						<td align="center" bgcolor="#EDEDED" ng-model="currentQ3"><span ng-style="color3" > {{currentQ3}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status2"> <span ng-style="color3">{{status3}}</span> </td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID3}}</td>
+					</tr>
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559"><font color="#EDEDED"> Counter 4 </font></td>
+						<td align="center" bgcolor="#EDEDED" ng-model="currentQ3"><span ng-style="color4" > {{currentQ4}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status2"> <span ng-style="color3">{{status3}}</span> </td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID4}}</td>
+					</tr>
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559"><font color="#EDEDED"> Counter 5 </font></td>
+						<td align="center" bgcolor="#EDEDED" ng-model="currentQ3"><span ng-style="color5" > {{currentQ5}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status2"> <span ng-style="color3">{{status3}}</span> </td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID5}}</td>
+					</tr>
+					<tr style="height: 18%; font-size: 58px;">
+						<td align="center" bgcolor="#405559"><font color="#EDEDED"> Counter 6 </font></td>
+						<td align="center" bgcolor="#EDEDED" ng-model="currentQ3"><span ng-style="color6" > {{currentQ6}}</span></td>
+						<!-- <td align="center" bgcolor="#EDEDED" ng-model="status2"> <span ng-style="color3">{{status3}}</span> </td> -->
+						<td align="center" bgcolor="#EDEDED" ng-model="status1">{{studentID6}}</td>
+					</tr>
+					<!-- <tr style="height: 17%; font-size: 60px;">
+						<td>  </td>
+						<td ng-model="standby1"> {{standby1}} </td>
+					</tr>
+					<tr style="height: 17%; font-size: 60px;">
+						<td>  </td>
+						<td ng-model="standby2"> {{standby2}} </td>
+					</tr>
+					<tr style="height: 17%; font-size: 60px;">
+						<td>  </td>
+						<td ng-model="standby3"> {{standby3}} </td>
+					</tr> -->
+				</tbody>
+				
+			</table>
+			<div align="center">
+			<font style="font-size: 2em;" ><b>Status :&nbsp;</b></font>
+			<span class="label label-warning" style="display:black;padding:2em;padding-top: 1.5em;padding-bottom: 0.5em"><font style="height: 100%;font-size: 2.5em;" >&nbsp;Calling&nbsp;</font></span> 
+			<span class="label label-danger" style="display:black;padding:2em;padding-top: 1.5em;padding-bottom: 0.5em"><font style="height: 100%;font-size: 2.5em;" >&nbsp;&nbsp;&nbsp;Busy&nbsp;&nbsp;&nbsp;</font></span> 
+			<span class="label label-success" style="display:black;padding:2em;padding-top: 1.5em;padding-bottom: 0.5em"><font style="height: 100%;font-size: 2.5em;" >Finished</font></span> 
+			<span class="label label-info" style="display:black;padding:2em;padding-top: 1.5em;padding-bottom: 0.5em"><font style="height: 100%;font-size: 2.5em;" >&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;</font></span> 
+
+			
+		</div>
+	</div>
+</body>
+</html>

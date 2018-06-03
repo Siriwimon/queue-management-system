@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html ng-app="ServicesApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+    <meta name="author" content="">
+
+	<title>Service Provider</title>
+
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	Optional theme
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" crossorigin="anonymous">
+
+	<link href="link/bootstrap-3.3.7-dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+
+	
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
+  	<script src="link/jquery.min.js"></script> 
+  	<script src="link/jquery.js"></script>
+
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script> -->
+  	<script src="link/angular-1.6.5/angular.min.js"></script>
+    <script src="link/angular-1.6.5/angular-route.min.js"></script>
+  	<!-- <script src="link/angular-1.6.5/angular-local-storage.min.js"></script> -->
+  	
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+  	<script src="link/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!-- <link href="link/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet"></script> -->
+    <link href="link/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet"></script>
+  	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  	<script src="link/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+  	<script src="link/prettify.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.5.2/angular-local-storage.min.js"></script> -->
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script> -->
+
+  	<script src="/socket.io/socket.io.js"></script>
+  	<script src="controller/service.js"></script>
+  	<script type="text/javascript">
+        var startTime = new Date().getTime();
+        var time = new Date().getTime();
+        $(document.body).bind("mousemove keypress", function(e){
+            time = new Date().getTime()
+        });
+
+
+        // setTimeout(firstRefresh,6000);
+
+        function refresh(){
+            if (new Date().getTime() - time >= 1800000){
+                window.location.reload(true);
+                console.log("reload");
+            }else{
+                setTimeout(refresh,60000);
+                console.log("refresh");
+            }            
+        }
+
+        setTimeout(refresh,60000);
+    </script> 
+</head>
+<body>
+    <!-- <iframe height="40%" width="100%" scrolling="yes"> -->
+	<!-- <div id="wrapper" height="40%" width="100%"> -->
+	<!-- <frameset rows="40%">
+	<frame name="top"> -->
+		<div style="height: 200px; overflow-y:scroll;overflow-x:hidden;" ng-controller = "QueueServicesCtrl">
+		
+
+           	
+	        <div class="row">
+				<div class="col-xs-4"></div>				
+
+				<div class="col-xs-4">
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="name"> User:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text" class="form-control" id="name" ng-model='name'></input> <!-- ng-change="counterSelect()" -->
+						</div>
+					</form>
+				</div>
+				<div class="col-xs-4">
+				    <div style="text-align: right;">
+						<!-- <button type="submit" class="btn btn-default" ng-click="resetQ()">RESET</button>&nbsp;&nbsp;&nbsp; -->
+						<!-- <button type="submit" class="btn btn-default" ng-click="logout()">Logout</button> -->
+						<button type="submit" class="btn btn-default"><a style="color: black;"href="/service/logout" >Logout</a></button>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4"></div>
+				
+
+				<div class="col-xs-4">
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="counter"> Service Counter:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<select class="form-control" id="counter" ng-model='selectedCounter' ng-options='number for number in counterNo' ></select> <!-- ng-change="counterSelect()" -->
+						</div>
+					</form>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<!-- <div class="col-xs-2"></div>			 -->
+
+				<div align="center">
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="task"> <font style="font-size: 1.2em;"><b>การให้บริการ: </b></font></label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<label id="task" ng-repeat="option in options">			  
+							  <input id="task"
+							    type="checkbox"
+							    name="selectedOptions[]"
+							    value="{{option.name}}"
+							    ng-model="option.selected"
+							    ng-click="checkTask()";
+							  > {{option.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</label>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			
+			<br><br>
+			<div class="row">
+				<div class="col-xs-4">
+					<!-- <div style="text-align: center;" ng-model="q">
+						<h3>PREVIOUS</h3>
+						<h1 style="font-size: 80px;text-align: center; ">
+							<label class="label label-default" style="height: 80px;width: 160px;display: inline-block;vertical-align: text-middle; ">{{prev}}</label>
+						</h1>
+						<br><br>
+						
+					</div> -->
+				</div>
+                <div class="col-xs-4">
+                	<div style="text-align: center;" ng-model="q">
+						<h2>CURRENT</h2>
+						<h1 style="font-size: 150px;text-align: center; ">
+							<label class="label label-info" style="height: 150px;width: 300px;display: inline-block;vertical-align: text-middle;" ng-model="localStorageCurrentQ">{{current}}</label>
+						</h1>
+						<br>
+						<div style="text-align: center;"><button type="submit" class="btn btn-primary btn-lg" ng-click="checkNext()" data-toggle="modal" data-target="#modal_service" ng-disabled="nextBT">NEXT</button></div> <!-- data-toggle="modal" data-target="#modal_service" -->
+					</div>
+                </div>
+                <div class="col-xs-4">
+                	<!-- <div style="text-align: center;" ng-model="q">
+						<h3>NEXT</h3>
+						<h1 style="font-size: 80px;text-align: center; ">
+							<label class="label label-default" style="height: 80px;width: 160px;display: inline-block;vertical-align: text-middle; ">{{next}}</label>
+						</h1>
+						<br><br>
+						
+					</div> -->
+					
+
+                </div>
+			</div>
+			<div class="row">
+
+				
+			</div>
+
+			<!-- <div style="text-align: center;"><h2>Your queue: &nbsp;&nbsp;<span ng-model="q">{{q}}</span></h2></div> -->
+        	<div class="modal fade" id="modal_service" role="dialog">
+                <div class="modal-dialog">
+    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Service Record</h4>
+                    </div>
+                    <div class="modal-body">
+                    	<div style="text-align: center;">
+                        	<p>Profile of Queue {{current}}</p>
+                        </div>
+                        <div style="text-align: center;">
+                        	<button class="btn btn-info" ng-click="busyStatus()" ng-disabled="busyBTState">&nbsp;&nbsp;Busy&nbsp;&nbsp;</button>
+                        	<button class="btn btn-warning" ng-click="skipStatus()" data-dismiss="modal" ng-disabled="skipBTState">&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputStudentID">Student ID</label>
+                            <input class="form-control" type="text" id="InputStudentID" placeholder="Student ID" ng-model="profile.studentid" ng-disabled="busyBT" autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputIDCode">Name and Lastname</label>
+                            <input class="form-control" type="text" id="InputIDCode" placeholder="Name and Lastname" ng-model="profile.name" ng-disabled="busyBT">
+                        </div>   
+
+                        <div class="form-group">
+                            <label for="InputRFID">RFID Code</label>
+                            <input class="form-control" type="text" id="InputRFID" placeholder="RFID Code" ng-model="profile.rfid" ng-disabled="busyBT">
+                        </div>
+
+                        <!-- <h4><b>Service<b></h4>
+                        <div class="row">
+                        	<div class="col-xs-1"></div>
+                        	<div class="col-xs-11">
+		                        <div ng-repeat="service in services">
+			                        <div>
+									  <input
+									    type="checkbox"
+									    name="selectedServices[]"
+									    value="{{service.title}}"
+									    ng-model="service.selected"
+									  > {{service.title}}</div>
+								</div>
+							</div>
+						</div> -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="recordProfile()" data-dismiss="modal" ng-disabled="busyBT">&nbsp;&nbsp;Submit&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="cancleBTState">Close</button>
+                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" ng-hide="cancleBTState">Cancle</button> -->
+                    </div>
+                </div>
+                </div>
+            </div> <!-- End of Modal Add !-->
+
+
+        </div>
+    <!-- </frame>
+    </frameset> -->
+	<!-- </div> -->
+	<!-- </iframe> -->
+	<iframe src="http://klogic.kmutnb.ac.th:8080/kris/index.jsp"  height="400px" width="100%" scrolling="yes"></iframe>
+
+</body>
+</html>

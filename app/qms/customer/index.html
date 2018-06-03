@@ -1,0 +1,262 @@
+<!DOCTYPE html> 
+<html ng-app="QueueApp" >
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Queue Management</title>
+    <script src="link/jquery.min.js"></script> 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"> -->
+       
+    <script src="link/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <link href="link/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ -->
+    <link rel="stylesheet" href="link/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <script src="link/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+
+    <script rel="link/jquery-file-upload/jquery.fileupload-ui.css"> </script>
+
+    <!-- Sweet Alert2 -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css"> -->
+    <script src="link/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="link/sweetalert2/dist/sweetalert2.min.css">
+
+    <!-- Angularjs -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script> -->
+    <script src="link/angular-1.6.5/angular.min.js"></script>
+    <script src="link/angular-1.6.5/angular-route.min.js"></script>
+    <script src="controller/customer.js"></script> 
+
+    <script src="/socket.io/socket.io.js"></script>
+   <!--  <script src="jquery.numpad.js"></script>
+    <link rel="stylesheet" href="jquery.numpad.css">        
+
+    <! keyboard widget css & script (required) -->
+    <link href="Keyboard-master/css/keyboard.css" rel="stylesheet">    
+    <script src="Keyboard-master/dist/js/jquery.keyboard.min.js"></script>   
+    <script src="Keyboard-master/dist/layouts/keyboard-layouts-combined.min.js"></script>
+    <script src="Keyboard-master/dist/layouts/keyboard-layouts-greywyvern.min.js"></script>
+
+    <!-- keyboard extensions (optional) -->
+    <script src="Keyboard-master/dist/js/jquery.mousewheel.min.js"></script>    
+    <script src="Keyboard-master/js/jquery.keyboard.extension-autocomplete.js"></script>
+    <script src="Keyboard-master/js/jquery.keyboard.extension-caret.js"></script>
+    <script src="Keyboard-master/dist/js/jquery.keyboard.extension-typing.min.js"></script>
+    <script src="Keyboard-master/dist/js/jquery.keyboard.extension-scramble.min.js"></script>
+
+
+    <link href="Keyboard-master/docs/css/tipsy.css" rel="stylesheet">
+    <script src="Keyboard-master/dist/js/ng-virtual-keyboard.min.js"></script>
+    <script type="text/javascript">
+        var startTime = new Date().getTime();
+        var time = new Date().getTime();
+        $(document.body).bind("mousemove keypress", function(e){
+            time = new Date().getTime()
+        });
+
+        function firstRefresh(){            
+            if (new Date().getTime() - startTime >= 1000){
+                window.location.reload(true);
+                console.log("firstRefresh")
+                
+            }
+            
+        }
+        firstRefresh();
+
+        // setTimeout(firstRefresh,6000);
+
+        function refresh(){
+            if (new Date().getTime() - time >= 1800000){
+                window.location.reload(true);
+                console.log("reload");
+            }else{
+                setTimeout(refresh,60000);
+                console.log("refresh");
+            }            
+        }
+
+        setTimeout(refresh,60000);
+    </script>       
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container-fluid" ng-controller = "QueueCtrl">
+        
+
+            <!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            Brand and toggle get grouped for better mobile display
+                <div class="navbar-header">
+                
+                    
+                </div>
+            </nav> -->
+            <br>
+            <div class="row">
+                <div class="col-md-1"><img src="eng-kmutnb.jpg" alt="Eng-logo" style="width:100px;height:100px;"></div>
+                <div class="col-md-11">
+                    <h1 class="page-header">
+                        &nbsp;&nbsp;ระบบจัดคิว
+                        <small>งานบริการวิชาการ คณะวิศวกรรมศาสตร์</small>                       
+                    </h1> 
+                </div>
+            </div> 
+            
+         
+            <!-- <div class="jumbotron"> -->
+               
+                <!-- <h1 align="center"></h1>       -->
+                <!-- <h2 align="center">งานบริการวิชาการ</h2> -->
+                
+                <div class="row" style="position: relative;">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <label for="idpad"><h2>กรุณากรอกรหัสนักศึกษา</h2></label>
+                        <div class="input-group"  style="font-size: 2em;">
+                            <!-- <input type="text" id="numpadButton" class="form-control" placeholder="เช่น 5901012630001" aria-describedby="numpadButton-btn" maxlength="13" ng-model="studentid" ng-change="checkID()" > -->
+                            <input  id="idpad" type="text" name="idpad" class="form-control" ng-model="studentid" ng-virtual-keyboard="numpad" autofocus>
+                            <span class="input-group-btn"  >
+                                <button class="btn btn-default" class="tooltip-tipsy" ng-click="onKeyboardClick('idpad')" type="button">&nbsp;&nbsp;<i class="glyphicon glyphicon-th"></i>&nbsp;&nbsp;</button>
+                                <button class="btn btn-danger" ng-click="clear();" >&nbsp;Clear&nbsp;</button>
+                            </span>
+                            <!-- <span class="input-group-btn"  >
+                                <button class="btn btn-danger" ng-click="clear()" >&nbsp;&nbsp;Clear&nbsp;&nbsp;</button>
+                            </span> -->
+
+                            <!-- <button class="btn btn-danger" ng-click="clear()" >&nbsp;&nbsp;Clear&nbsp;&nbsp;</button> -->
+                        </div>
+                        
+                    </div>
+                    <!-- <div class="col-md-1" style="position: absolute;bottom: 0;">
+                        <button class="btn btn-danger" ng-click="clear();onKeyboardClick('idpad')" >&nbsp;&nbsp;Clear&nbsp;&nbsp;</button>
+                    </div> -->
+                </div>
+                <br>
+               
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 1;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;"> &nbsp;1&nbsp; </button> 
+                    </div>   
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> เพิ่มวิชาเรียน, เปลี่ยนตอนเรียน</p>
+                    </div> 
+
+                </div><br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 2;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;2&nbsp; </button> 
+                    </div> 
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> ทุนการศึกษา</p>
+                    </div>                             
+                </div><br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 3;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;3&nbsp; </button> 
+                    </div>  
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> จองห้องเรียน</p>
+                    </div>                            
+                </div><br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 4;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;4&nbsp; </button> 
+                    </div>           
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> คำร้องทั่วไป</p>
+                    </div>                   
+                </div><br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 5;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;5&nbsp; </button> 
+                    </div>       
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> งานสอบ (ไม่มีบัตร,แต่งกายไม่เรียบร้อย,มาสาย)</p>
+                    </div>                       
+                </div><br>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 6;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;6&nbsp; </button> 
+                    </div>       
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> ถอนวิชาเรียน</p>
+                    </div>                       
+                </div><br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-1">
+                       <button type="submit" class="btn btn-primary btn-lg" ng-click="taskRequire = 7;selectedOption()" data-toggle="modal" data-target="#modal_service" ng-disabled="opStatus" style="font-size: 2em;">  &nbsp;7&nbsp; </button> 
+                    </div>       
+                    
+                    <div class="col-md-8">
+                       <p style="font-size: 2em;"> บริการอื่นๆ</p>
+                    </div>                       
+                </div>
+            <!-- </div> --> <!-- Jumbotron -->
+
+            <!-- <div style="text-align: center;"><h2>Your queue: &nbsp;&nbsp;<span >{{queue}}</span></h2></div> -->
+            <!-- <div style="text-align: right;"><button type="submit" class="btn btn-danger" ng-click="resetQ()">RESET</button></div> -->  
+
+            <div class="modal fade" id="modal_service" role="dialog">
+                <div class="modal-dialog">
+    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Confirm Queue</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center;">
+                            <p style="font-size: 1.5em;"><b>Your Student ID : </b>{{stdID}}</p>                            
+                            <p style="font-size: 1.5em;"><b>Your queue number : </b>{{q}}</p>
+                            <p style="font-size: 1.5em;"><b>Service : </b>{{detail.subject}}</p>
+                            <p style="font-size: 1.5em;"> Please Select <b>"OK"</b> to confirm your selection.</p>
+                        </div>                        
+                       
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="confirmQueue()" data-dismiss="modal" >&nbsp;&nbsp;OK&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>              
+        </div>
+    </div>
+
+    
+</body>
+</html>
